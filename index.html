@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>¡Felices 3 meses, Juan Pablo! ❤️</title>
+  <style>
+    :root{
+      --bg1:#ff9a9e; /* rosa */
+      --bg2:#fad0c4; /* melocotón */
+      --bg3:#fbc2eb; /* lila rosado */
+      --card:#ffffffcc; /* blanco translúcido */
+      --text:#2a2a2a;
+      --accent:#ff4d6d; /* fucsia */
+      --accent-2:#6c63ff; /* lila */
+      --shadow: 0 20px 40px rgba(0,0,0,.15);
+    }
+
+    /* Fondo degradado animado */
+    body{
+      margin:0;min-height:100svh;display:grid;place-items:center;
+      font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      color:var(--text); overflow:hidden; background:#000;
+      background: linear-gradient(120deg,var(--bg1),var(--bg2),var(--bg3));
+      background-size: 300% 300%;
+      animation: gradient 12s ease infinite;
+    }
+    @keyframes gradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+    /* Partículas decorativas del fondo (corazones flotando) */
+    .floaters{position:fixed; inset:0; pointer-events:none; overflow:hidden;}
+    .heart{
+      position:absolute; font-size:clamp(18px,3vw,30px); filter: drop-shadow(0 4px 6px rgba(0,0,0,.25));
+      animation: rise linear both; opacity:.8;
+    }
+    @keyframes rise{
+      from{ transform: translateY(30svh) scale(.8) rotate(0deg); opacity:0; }
+      to{ transform: translateY(-110svh) scale(1.2) rotate(360deg); opacity:1; }
+    }
+
+    /* Tarjeta principal */
+    .card{
+      width:min(820px,92vw); padding: clamp(22px,4vw,40px);
+      background:var(--card); backdrop-filter: blur(10px);
+      border-radius: 28px; box-shadow: var(--shadow);
+      position:relative; isolation:isolate;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:.6rem;
+      background: #fff; border-radius:999px; padding:.5rem 1rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,.12);
+      font-weight:700; letter-spacing:.3px; font-size: .95rem;
+    }
+    .badge .dot{ width:10px; height:10px; border-radius:999px; background: var(--accent); box-shadow:0 0 0 6px #ff4d6d22;}
+
+    h1{ font-size: clamp(28px,5.6vw,56px); margin: .8rem 0; line-height:1.05 }
+    .gradient-text{ background: linear-gradient(90deg,var(--accent),#ff8fa3,var(--accent-2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+    p{ font-size:clamp(15px,2.6vw,18px); margin:0; opacity:.9 }
+
+    .ribbon{
+      position:absolute; inset:auto -8px -8px auto; transform: rotate(8deg);
+      background: linear-gradient(90deg,var(--accent),#ff85a1);
+      color:#fff; padding:.55rem 1rem; border-radius: 12px; font-weight:700; box-shadow: var(--shadow);
+    }
+
+    .actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top: 22px }
+    button{
+      appearance:none; border:none; cursor:pointer; font-weight:800; letter-spacing:.3px;
+      padding: .9rem 1.2rem; border-radius: 16px; box-shadow: var(--shadow);
+      background:#fff; color:var(--accent); transition: transform .12s ease, box-shadow .2s ease;
+    }
+    button:hover{ transform: translateY(-2px) }
+    .primary{ background: var(--accent); color:#fff }
+
+    /* Mensaje escrito a máquina */
+    .type{ margin-top:16px; font-size:clamp(16px,3vw,20px); font-weight:600; }
+    .cursor{ display:inline-block; width:1ch; animation: blink 1s steps(1,end) infinite; }
+    @keyframes blink{ 50% { opacity: 0; } }
+
+    /* Pie de tarjeta */
+    .footer{ display:flex; align-items:center; gap:8px; margin-top:22px; opacity:.8; font-size:.95rem }
+    .avatar{ width:36px; height:36px; border-radius:50%; background:linear-gradient(120deg,#fff,#ffd6e0); display:grid; place-items:center; font-size:18px; }
+
+    /* Partículas de celebración */
+    .particle{ position:fixed; top:-20px; font-size:22px; pointer-events:none; animation: fall linear forwards; filter: drop-shadow(0 6px 14px rgba(0,0,0,.2)); }
+    @keyframes fall{ to{ transform: translateY(110svh) rotate(720deg); opacity: .9; } }
+
+    /* Etiquetas personalizadas */
+    .chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px }
+    .chip{ background:#fff; color:#e01e5a; border-radius:999px; padding:.45rem .8rem; font-weight:700; box-shadow:0 10px 20px rgba(0,0,0,.08) }
+
+  </style>
+</head>
+<body>
+  <!-- Corazones flotando del fondo -->
+  <div class="floaters" id="floaters"></div>
+
+  <main class="card">
+    <div class="badge"><span class="dot"></span> ¡Nuestro día especial!</div>
+
+    <h1>
+      <span class="gradient-text">¡Felices 3 meses</span>, meu principe! <span aria-hidden>🤍</span>
+    </h1>
+
+    <p>
+      Gracias por estos 3 meses llenos de risas, cariños, peleas y momentos unicos, vamos por esa familia que tanto soñamos.
+    </p>
+
+    <div class="chips" id="chips">
+      <span class="chip">Danna + Juan Pablo</span>
+      <span class="chip">Equipo dinamita 💞</span>
+      <span class="chip">3/∞</span>
+    </div>
+
+    <div class="type" id="type"></div>
+
+    <div class="actions">
+      <button class="primary" id="celebrar">¡Celebremos! ✨</button>
+      <button id="corazones">Más corazones 💗</button>
+      <button id="cambiar">Cambiar colores 🎨</button>
+    </div>
+
+    <div class="footer">
+      <div class="avatar">💫</div>
+      <span id="firma">Con mucho amor, <strong>Minha Princesa</strong> ✍️</span>
+    </div>
+
+    <div class="ribbon">3 meses juntitos 💝</div>
+  </main>
+
+  <script>
+    // ===== Utilidades =====
+    const qs = (s,root=document)=>root.querySelector(s);
+    const elFloaters = qs('#floaters');
+
+    // Corazones flotantes de fondo
+    const HEARTS = ['💗','💖','💘','💝','💞','💕'];
+    function spawnFloatingHearts(count=24){
+      for(let i=0;i<count;i++){
+        const h = document.createElement('div');
+        h.className='heart';
+        h.textContent = HEARTS[Math.floor(Math.random()*HEARTS.length)];
+        h.style.left = Math.random()*100 + 'vw';
+        h.style.bottom = (-10 + Math.random()*30) + 'vh';
+        h.style.animationDuration = (6+Math.random()*10)+'s';
+        h.style.animationDelay = (Math.random()*8)+'s';
+        elFloaters.appendChild(h);
+        h.addEventListener('animationend',()=>h.remove());
+      }
+    }
+    spawnFloatingHearts(30);
+    setInterval(()=>spawnFloatingHearts(6), 2000);
+
+    // Efecto de máquina de escribir
+    const mensajes = [
+      'Eres mi casualidad favorita ✨',
+      'Contigo todo es más bonito 💐',
+      'Gracias por elegirnos cada día 🤍',
+      '3 meses... y contando hacia siempre ♾️'
+    ];
+    let idx = 0;
+    const typeBox = qs('#type');
+    const cursor = '<span class="cursor">|</span>';
+
+    function typeMessage(text){
+      typeBox.innerHTML = '';
+      let i=0; const timer = setInterval(()=>{
+        typeBox.innerHTML = text.slice(0, i++) + cursor;
+        if(i>text.length){ clearInterval(timer); setTimeout(()=>fadeCursor(),800); }
+      }, 40);
+    }
+    function fadeCursor(){ typeBox.innerHTML = typeBox.textContent; }
+    function cycle(){ typeMessage(mensajes[idx]); idx=(idx+1)%mensajes.length; }
+    cycle(); setInterval(cycle, 4200);
+
+    // Confeti/Corazones que caen
+    function lluvia(textos=['💝','✨','🌸','💫']){
+      const N = 70;
+      for(let i=0;i<N;i++){
+        const p = document.createElement('div');
+        p.className='particle';
+        p.textContent = textos[Math.floor(Math.random()*textos.length)];
+        p.style.left = Math.random()*100 + 'vw';
+        p.style.animationDuration = (5 + Math.random()*4)+'s';
+        p.style.fontSize = (18 + Math.random()*22) + 'px';
+        document.body.appendChild(p);
+        p.addEventListener('animationend',()=>p.remove());
+      }
+    }
+
+    // Cambiar esquema de color
+    const palettes = [
+      ['#ff9a9e','#fad0c4','#fbc2eb','#ff4d6d','#6c63ff'],
+      ['#a18cd1','#fbc2eb','#fad0c4','#8b5cf6','#ef4444'],
+      ['#84fab0','#8fd3f4','#cfd9df','#06b6d4','#16a34a'],
+      ['#ffd3a5','#fd6585','#ffd3a5','#ff577f','#845ec2'],
+    ];
+    let pal = 0;
+    function applyPalette(p){
+      const [bg1,bg2,bg3,accent,accent2] = p;
+      document.documentElement.style.setProperty('--bg1', bg1);
+      document.documentElement.style.setProperty('--bg2', bg2);
+      document.documentElement.style.setProperty('--bg3', bg3);
+      document.documentElement.style.setProperty('--accent', accent);
+      document.documentElement.style.setProperty('--accent-2', accent2);
+    }
+
+    // Eventos de botones
+    qs('#celebrar').addEventListener('click', ()=> lluvia(['💖','💗','💘','✨','🌟']));
+    qs('#corazones').addEventListener('click', ()=> lluvia(['🤍🐼']));
+    qs('#cambiar').addEventListener('click', ()=>{ pal=(pal+1)%palettes.length; applyPalette(palettes[pal]); lluvia(['🌈','✨']); });
+
+    // Personalización rápida desde la URL (opcional): ?para=Danna&de=Alex
+    const params = new URLSearchParams(location.search);
+    const para = params.get('para');
+    const de = params.get('de');
+    if(para){ document.title = `Para ${para} — 3 meses`; }
+    if(para){
+      const chips = qs('#chips');
+      const tag = document.createElement('span');
+      tag.className='chip';
+      tag.textContent = `Para ${para} 💌`;
+      chips.appendChild(tag);
+    }
+    if(de){ qs('#firma').innerHTML = `Con mucho amor, <strong>${de}</strong> ✍️`; }
+  </script>
+</body>
+</html>
